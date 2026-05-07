@@ -1,26 +1,160 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand Identity - Light Mode (Soft Cool-Gray Base) */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  
+  --primary: #1e3a8a; /* Trust Blue */
+  --primary-foreground: #ffffff;
+  
+  --success: #059669; /* Savings Green */
+  --success-foreground: #ffffff;
+  
+  --secondary: #e2e8f0;
+  --secondary-foreground: #0f172a;
+  
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  
+  --accent: #2dd4bf; /* Teal/Mint Functional Accent */
+  --accent-foreground: #0f172a;
+  
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: rgba(30, 58, 138, 0.1);
+  
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem; /* Rounded Level 2 Geometry */
+  --radius-lg: 1.5rem;
+  
+  /* Precision Elevation */
+  --shadow-ambient: 0 4px 20px -2px rgba(30, 58, 138, 0.04);
+}
+
+.dark {
+  /* Brand Identity - Dark Mode (Sophisticated Deep Grays/Charcoals) */
+  --background: #020617;
+  --foreground: #f8fafc;
+  
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  
+  --primary: #3b82f6; /* Lighter Trust Blue for dark mode */
+  --primary-foreground: #ffffff;
+  
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  
+  --accent: #2dd4bf;
+  --accent-foreground: #020617;
+  
+  --border: #334155;
+  --input: #334155;
+  --ring: rgba(59, 130, 246, 0.2);
+  
+  --shadow-ambient: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --font-manrope: var(--font-manrope), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-worksans: var(--font-worksans), sans-serif;
+  
+  --shadow-credex: var(--shadow-ambient);
+  
+  --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.4s ease-out forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter);
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-manrope);
+}
+
+.label-caps {
+  font-family: var(--font-worksans);
+  @apply text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground;
+}
+
+.tabular-numbers {
+  font-variant-numeric: tabular-nums;
+}
+
+.credex-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-ambient);
+}
+
+.input-glow:focus {
+  @apply ring-4 ring-primary/5 border-primary transition-all;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }

@@ -1,65 +1,147 @@
-import Image from "next/image";
+import AuditForm from '@/components/form/AuditForm'
+import ThemeToggle from '@/components/ThemeToggle'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-background text-foreground transition-colors duration-500 overflow-x-hidden">
+      {/* Header */}
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 animate-fade-in">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-4 group cursor-pointer">
+            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:scale-105">
+              <span className="text-white text-base font-black tracking-tighter">C</span>
+            </div>
+            <div>
+              <span className="font-black text-foreground text-xl tracking-tight block leading-none mb-1 uppercase">Credex</span>
+              <span className="label-caps !text-primary leading-none">Audit System</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-8 mr-8">
+              <a href="#" className="label-caps hover:text-primary transition-colors">Methodology</a>
+              <a href="#" className="label-caps hover:text-primary transition-colors">Benchmarks</a>
+            </nav>
+            <ThemeToggle />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* 12-Column Grid Layout */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Left Column: Hero/Context (5 Columns) */}
+          <div className="lg:col-span-5 space-y-12 animate-fade-in-up opacity-0">
+            <div>
+              <div className="inline-flex items-center gap-3 bg-primary/5 text-primary px-4 py-2 rounded-full mb-10 border border-primary/10">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-widest font-worksans">Institutional Grade</span>
+              </div>
+              <h1 className="text-5xl md:text-6xl font-black text-foreground mb-8 leading-[1.1] tracking-tight">
+                Algorithmic<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-br from-primary via-primary/80 to-accent">
+                  Spend Intelligence.
+                </span>
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed font-medium">
+                The Credex Audit System employs high-precision financial auditing to optimize your AI infrastructure. Identify redundancies and reclaim capital with institutional transparency.
+              </p>
+            </div>
+
+            {/* Precision Metrics Display */}
+            <div className="grid grid-cols-2 gap-6 pt-4 tabular-numbers">
+              <div className="space-y-1">
+                <p className="label-caps">Avg. Optimization</p>
+                <p className="text-3xl font-black text-success tracking-tighter">23.4%</p>
+              </div>
+              <div className="space-y-1">
+                <p className="label-caps">Time to Audit</p>
+                <p className="text-3xl font-black text-foreground tracking-tighter">58.2s</p>
+              </div>
+            </div>
+
+            {/* Compliance/Security Note */}
+            <div className="p-6 rounded-2xl bg-secondary/50 border border-border/50 space-y-3">
+              <p className="label-caps !text-foreground">Security & Sovereignty</p>
+              <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                Audits are processed client-side. No financial data ever leaves your local environment. Zero-knowledge by design.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Audit Engine (7 Columns) */}
+          <div className="lg:col-span-7 animate-fade-in-up opacity-0 animate-delay-200">
+            <div className="credex-card overflow-hidden">
+              <div className="border-b border-border/50 bg-muted/30 px-8 py-5 flex items-center justify-between">
+                <h2 className="label-caps !text-foreground font-black">Audit Configuration</h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-success"></div>
+                  <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Live Engine</span>
+                </div>
+              </div>
+              <div className="p-8 md:p-10">
+                <AuditForm />
+              </div>
+            </div>
+            
+            {/* Contextual Intelligence Labels */}
+            <div className="mt-8 grid grid-cols-3 gap-4 text-center">
+              <div className="py-3 px-4 rounded-xl border border-border/30 bg-background/50">
+                <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Context-Aware</p>
+              </div>
+              <div className="py-3 px-4 rounded-xl border border-border/30 bg-background/50">
+                <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Tabular Accuracy</p>
+              </div>
+              <div className="py-3 px-4 rounded-xl border border-border/30 bg-background/50">
+                <p className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Multi-Model</p>
+              </div>
+            </div>
+          </div>
+
         </div>
-      </main>
-    </div>
-  );
+      </div>
+
+      {/* Footer */}
+      <footer className="border-t border-border/50 bg-card py-20 mt-20">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
+          <div className="md:col-span-2 space-y-6">
+            <div className="flex items-center gap-3 opacity-50">
+              <div className="w-8 h-8 bg-foreground rounded flex items-center justify-center">
+                <span className="text-background text-xs font-black">C</span>
+              </div>
+              <span className="font-black text-foreground tracking-widest text-sm uppercase">Credex System</span>
+            </div>
+            <p className="text-sm text-muted-foreground font-medium max-w-sm leading-relaxed">
+              Precision-engineered for the modern engineering organization. 
+              The authoritative standard for AI subscription intelligence.
+            </p>
+          </div>
+          <div className="space-y-6">
+            <h4 className="label-caps !text-foreground">Intelligence</h4>
+            <ul className="space-y-4 text-sm font-semibold text-muted-foreground">
+              <li><a href="#" className="hover:text-primary transition-colors">Pricing Data Library</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Optimization Models</a></li>
+            </ul>
+          </div>
+          <div className="space-y-6">
+            <h4 className="label-caps !text-foreground">System</h4>
+            <ul className="space-y-4 text-sm font-semibold text-muted-foreground">
+              <li><a href="https://credex.rocks" className="hover:text-primary transition-colors underline decoration-primary/30 underline-offset-4">Credex Protocol</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Architecture</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 mt-20 pt-10 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <span className="label-caps !text-muted-foreground/40">© 2026 Credex Audit System · v2.1.0-PRECISION</span>
+          <div className="flex gap-10">
+            <a href="#" className="label-caps !text-muted-foreground/40 hover:!text-primary transition-colors">Privacy Sovereignty</a>
+            <a href="#" className="label-caps !text-muted-foreground/40 hover:!text-primary transition-colors">Institutional Terms</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  )
 }
