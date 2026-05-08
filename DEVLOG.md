@@ -33,6 +33,10 @@
   - Buy discounted credits through Credex (for heavy API users)
 - Wrote 10 tests to make sure calculations are correct
 - Documented all pricing with links and conditions (e.g., Claude Team needs 5+ people)
+- Form submission → API route → Audit engine → Results page
+- Basic preview page - Displays savings and recommendations
+- Added `monthlySpend > 0` validation (was missing before)
+
 
 **Problems I ran into:**
 

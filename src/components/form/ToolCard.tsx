@@ -87,13 +87,14 @@ export default function ToolCard({ entry }: ToolCardProps) {
             <input
               type="number"
               min={0}
-              step="0.01"
+              step={10}
               value={entry.monthlySpend}
               onChange={(e) =>
                 updateTool(entry.toolId, {
                   monthlySpend: parseFloat(e.target.value) || 0,
                 })
               }
+              placeholder="Monthly spend"
               className="w-full bg-muted/30 border border-border/50 rounded-lg pl-8 pr-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
             />
           </div>
