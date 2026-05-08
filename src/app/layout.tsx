@@ -19,7 +19,7 @@ const workSans = Work_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Credex StackAudit — Institutional AI Spend Intelligence',
+  title: 'StackAudit — Institutional AI Spend Intelligence',
   description: 'High-fidelity AI spend audit system for startups. Precision-engineered to identify redundant subscriptions and optimize your engineering stack.',
 }
 

@@ -14,7 +14,7 @@
 
 
 **What I got stuck on:**
-- Anthropic API access: console.anthropic.com showed $0 credits with no free tier available without adding a payment method. 
+- *Anthropic API access*: console.anthropic.com showed $0 credits with no free tier available without adding a payment method. 
 - Resolved by switching to Gemini 1.5 Flash via Google AI Studio (aistudio.google.com).
 - Given "Anthropic preferred, or any LLM" — Gemini satisfies the requirement and has a free tier that covers the full project scope.
 
@@ -22,3 +22,26 @@
 - Zustand is a lightweight React state management library — no boilerplate unlike Redux. Define state and actions in one function, use anywhere with useFormStore().
 - The persist middleware auto-syncs state to localStorage, so form data survives page reloads with zero extra code.
 - GitHub Actions CI runs automatically on every push to main. The workflow file in .github/workflows/ci.yml defines jobs — ours runs lint, typecheck, and tests in sequence on Ubuntu.
+
+## Day 2 — 2026-05-08
+
+**What I did:**
+- Created the brain of the app - audit engine that finds savings opportunities
+- Added 3 types of checks:
+  - Same tool downgrade (paying too much on current tool)
+  - Switch to cheaper competitor (e.g., Copilot → Cursor)
+  - Buy discounted credits through Credex (for heavy API users)
+- Wrote 10 tests to make sure calculations are correct
+- Documented all pricing with links and conditions (e.g., Claude Team needs 5+ people)
+
+**Problems I ran into:**
+
+- *Suggesting useless switches* - Engine told Copilot users paying $10 to switch to Cursor for $0 savings. Fixed by only suggesting switches that save at least $20 (individual) or $50 (team).
+- *Missing team requirements* - Tried to downgrade 5-person Claude Team ($125) to Pro ($100) but Pro is for individuals only. Fixed by checking minimum seats before suggesting plans.
+
+**API tools broke logic** - Anthropic API is pay-as-you-go, not per person like subscriptions. Added special handling for API tools.
+
+**How I fixed them:**
+- Added savings thresholds to filter out bad suggestions
+- Added `minSeats` check before recommending any plan
+- Created separate logic for API vs subscription tools

@@ -12,8 +12,8 @@ export default function HomePage() {
               <span className="text-white text-base font-black tracking-tighter">C</span>
             </div>
             <div>
-              <span className="font-black text-foreground text-xl tracking-tight block leading-none mb-1 uppercase">Credex</span>
-              <span className="label-caps !text-primary leading-none">Audit System</span>
+              <span className="font-black text-foreground text-xl tracking-tight block leading-none mb-1 uppercase">StackAudit</span>
+              <span className="label-caps !text-primary leading-none">Intelligence System</span>
             </div>
           </div>
           <div className="flex items-center gap-6">
@@ -47,7 +47,7 @@ export default function HomePage() {
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed font-medium">
-                The Credex Audit System employs high-precision financial auditing to optimize your AI infrastructure. Identify redundancies and reclaim capital with institutional transparency.
+                StackAudit employs high-precision financial auditing to optimize your AI infrastructure. Identify redundancies and reclaim capital with institutional transparency.
               </p>
             </div>
 
@@ -110,9 +110,12 @@ export default function HomePage() {
           <div className="md:col-span-2 space-y-6">
             <div className="flex items-center gap-3 opacity-50">
               <div className="w-8 h-8 bg-foreground rounded flex items-center justify-center">
-                <span className="text-background text-xs font-black">C</span>
+                <span className="text-background text-xs font-black">S</span>
               </div>
-              <span className="font-black text-foreground tracking-widest text-sm uppercase">Credex System</span>
+              <span className="tracking-widest text-sm uppercase">
+                <span className="font-black text-foreground">Stack</span>
+                <span className="font-medium text-muted-foreground">Audit</span>
+              </span>
             </div>
             <p className="text-sm text-muted-foreground font-medium max-w-sm leading-relaxed">
               Precision-engineered for the modern engineering organization. 
@@ -129,13 +132,13 @@ export default function HomePage() {
           <div className="space-y-6">
             <h4 className="label-caps !text-foreground">System</h4>
             <ul className="space-y-4 text-sm font-semibold text-muted-foreground">
-              <li><a href="https://credex.rocks" className="hover:text-primary transition-colors underline decoration-primary/30 underline-offset-4">Credex Protocol</a></li>
+              <li><a href="https://credex.rocks" className="hover:text-primary transition-colors underline decoration-primary/30 underline-offset-4" target="_blank" rel="noopener noreferrer">Powered by Credex</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Architecture</a></li>
             </ul>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 md:px-12 mt-20 pt-10 border-t border-border/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <span className="label-caps !text-muted-foreground/40">© 2026 Credex Audit System · v2.1.0-PRECISION</span>
+          <span className="label-caps !text-muted-foreground/40">© 2026 StackAudit System · v2.1.0-PRECISION</span>
           <div className="flex gap-10">
             <a href="#" className="label-caps !text-muted-foreground/40 hover:!text-primary transition-colors">Privacy Sovereignty</a>
             <a href="#" className="label-caps !text-muted-foreground/40 hover:!text-primary transition-colors">Institutional Terms</a>
