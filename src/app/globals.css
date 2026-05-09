@@ -23,8 +23,8 @@
   --accent: #2dd4bf; /* Teal/Mint Functional Accent */
   --accent-foreground: #0f172a;
   
-  --border: #e2e8f0;
-  --input: #e2e8f0;
+  --border: #cbd5e1; /* More prominent border for light mode */
+  --input: #cbd5e1;
   --ring: rgba(30, 58, 138, 0.1);
   
   --radius-sm: 0.375rem;
@@ -127,7 +127,7 @@ h1, h2, h3, h4 {
 
 .label-caps {
   font-family: var(--font-worksans);
-  @apply text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground;
+  @apply text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground;
 }
 
 .tabular-numbers {

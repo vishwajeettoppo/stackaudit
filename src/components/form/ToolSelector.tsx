@@ -32,7 +32,7 @@ export default function ToolSelector() {
             <span className="w-6 h-6 flex items-center justify-center rounded bg-muted text-[10px] group-hover:bg-primary/10 transition-colors">
               +
             </span>
-            <span className="uppercase tracking-widest">{tool.name}</span>
+            <span className="uppercase tracking-widest font-worksans">{tool.name}</span>
           </button>
         ))}
       </div>

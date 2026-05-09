@@ -12,7 +12,7 @@ export default function ToolCard({ entry }: ToolCardProps) {
   const tool = TOOL_MAP[entry.toolId]
 
   return (
-    <div className="bg-card border border-border/50 rounded-xl p-6 shadow-credex hover:border-primary/30 transition-all group">
+    <div className="bg-card border border-border rounded-xl p-6 shadow-credex hover:border-primary/30 transition-all group">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-muted border border-border/30 flex items-center justify-center font-black text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
@@ -44,7 +44,7 @@ export default function ToolCard({ entry }: ToolCardProps) {
             <select
               value={entry.plan}
               onChange={(e) => updateTool(entry.toolId, { plan: e.target.value })}
-              className="w-full appearance-none bg-muted/30 border border-border/50 rounded-lg px-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow"
+              className="w-full appearance-none bg-muted/30 border border-border rounded-lg px-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow"
             >
               <option value="">Verify plan...</option>
               {tool.plans.map((plan) => (
@@ -73,7 +73,7 @@ export default function ToolCard({ entry }: ToolCardProps) {
             onChange={(e) =>
               updateTool(entry.toolId, { seats: parseInt(e.target.value) || 1 })
             }
-            className="w-full bg-muted/30 border border-border/50 rounded-lg px-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
+            className="w-full bg-muted/30 border border-border rounded-lg px-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
           />
         </div>
 
@@ -95,7 +95,7 @@ export default function ToolCard({ entry }: ToolCardProps) {
                 })
               }
               placeholder="Monthly spend"
-              className="w-full bg-muted/30 border border-border/50 rounded-lg pl-8 pr-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
+              className="w-full bg-muted/30 border border-border rounded-lg pl-8 pr-4 py-2.5 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
             />
           </div>
         </div>

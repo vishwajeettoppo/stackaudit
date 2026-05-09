@@ -39,7 +39,6 @@
 
 
 **Problems I ran into:**
-
 - *Suggesting useless switches* - Engine told Copilot users paying $10 to switch to Cursor for $0 savings. Fixed by only suggesting switches that save at least $20 (individual) or $50 (team).
 - *Missing team requirements* - Tried to downgrade 5-person Claude Team ($125) to Pro ($100) but Pro is for individuals only. Fixed by checking minimum seats before suggesting plans.
 
@@ -49,3 +48,15 @@
 - Added savings thresholds to filter out bad suggestions
 - Added `minSeats` check before recommending any plan
 - Created separate logic for API vs subscription tools
+
+## Day 3 — 2026-05-09
+
+**What I did:**
+- Solved lint errors
+- Integrated Google Gemini API for AI-powered summaries (free tier)
+- Built complete results page with:
+  - Hero savings number (monthly + annual)
+  - Per-tool breakdown cards
+  - AI summary section with loading states
+- Added fallback summaries when Gemini API fails
+- Implemented print/PDF export functionality

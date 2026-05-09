@@ -5,15 +5,16 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-background text-foreground transition-colors duration-500 overflow-x-hidden">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50 animate-fade-in">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border animate-fade-in">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
           <div className="flex items-center gap-4 group cursor-pointer">
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:scale-105">
-              <span className="text-white text-base font-black tracking-tighter">C</span>
+              <span className="text-white text-base font-black tracking-tighter">SA</span>
             </div>
             <div>
-              <span className="font-black text-foreground text-xl tracking-tight block leading-none mb-1 uppercase">StackAudit</span>
-              <span className="label-caps !text-primary leading-none">Intelligence System</span>
+              <span className="font-black text-foreground text-xl tracking-tight  leading-none mb-1 uppercase">Stack</span>
+              <span className="font-black text-primary text-xl tracking-tight  leading-none mb-1 uppercase">Audit</span>
+              {/* <span className="label-caps !text-primary leading-none block">Intelligence System</span> */}
             </div>
           </div>
           <div className="flex items-center gap-6">
@@ -64,7 +65,7 @@ export default function HomePage() {
             </div>
 
             {/* Compliance/Security Note */}
-            <div className="p-6 rounded-2xl bg-secondary/50 border border-border/50 space-y-3">
+            <div className="p-6 rounded-2xl bg-secondary/50 border border-border space-y-3">
               <p className="label-caps !text-foreground">Security & Sovereignty</p>
               <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                 Audits are processed client-side. No financial data ever leaves your local environment. Zero-knowledge by design.
@@ -75,7 +76,7 @@ export default function HomePage() {
           {/* Right Column: Audit Engine (7 Columns) */}
           <div className="lg:col-span-7 animate-fade-in-up opacity-0 animate-delay-200">
             <div className="credex-card overflow-hidden">
-              <div className="border-b border-border/50 bg-muted/30 px-8 py-5 flex items-center justify-between">
+              <div className="border-b border-border bg-muted/30 px-8 py-5 flex items-center justify-between">
                 <h2 className="label-caps !text-foreground font-black">Audit Configuration</h2>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-success"></div>
@@ -105,7 +106,7 @@ export default function HomePage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 bg-card py-20 mt-20">
+      <footer className="border-t border-border bg-card py-20 mt-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-12 items-start">
           <div className="md:col-span-2 space-y-6">
             <div className="flex items-center gap-3 opacity-50">

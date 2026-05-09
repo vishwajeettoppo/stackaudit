@@ -80,7 +80,7 @@ export default function AuditForm() {
               min={1}
               value={teamSize}
               onChange={(e) => setTeamSize(parseInt(e.target.value) || 1)}
-              className="w-full bg-muted/30 border border-border/50 rounded-lg px-4 py-3 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
+              className="w-full bg-muted/30 border border-border rounded-lg px-4 py-3 text-sm font-bold text-foreground focus:outline-none input-glow tabular-numbers"
             />
           </div>
           <div className="space-y-3">
@@ -91,7 +91,7 @@ export default function AuditForm() {
               <select
                 value={useCase}
                 onChange={(e) => setUseCase(e.target.value as UseCase)}
-                className="w-full appearance-none bg-muted/30 border border-border/50 rounded-lg px-4 py-3 text-sm font-bold text-foreground focus:outline-none input-glow"
+                className="w-full appearance-none bg-muted/30 border border-border rounded-lg px-4 py-3 text-sm font-bold text-foreground focus:outline-none input-glow"
               >
                 {USE_CASES.map((uc) => (
                   <option key={uc.id} value={uc.id} className="bg-card">
@@ -129,7 +129,7 @@ export default function AuditForm() {
       <ToolSelector />
 
       {/* Validation & Submit */}
-      <div className="pt-10 border-t border-border/50">
+      <div className="pt-10 border-t border-border">
         {tools.length > 0 && !isValid && (
           <div className="flex items-center gap-3 text-primary bg-primary/5 px-5 py-4 rounded-xl mb-8 border border-primary/10 animate-fade-in">
             <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
