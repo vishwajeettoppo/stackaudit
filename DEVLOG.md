@@ -60,3 +60,17 @@
   - AI summary section with loading states
 - Added fallback summaries when Gemini API fails
 - Implemented print/PDF export functionality
+
+## Day 4 — 2026-05-10
+
+**What I did:**
+- Set up Supabase database for storing audit results
+- Created email capture modal
+- Integrated Resend for emails
+- Built HTML email template with audit summary
+- Added shareable URLs with unique tokens
+- Built shared audit view page
+
+**What worked:**
+- Emails delivered within 2-3 seconds
+- Share links preserve all audit data

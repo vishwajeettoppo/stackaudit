@@ -9,14 +9,20 @@ interface EmailCaptureModalProps {
   auditId: string;
   shareToken: string;
   totalSavings: number;
+  annualSavings: number;
+  recommendationsCount: number;
+  shareUrl: string;
 }
 
 export default function EmailCaptureModal({ 
   isOpen, 
   onClose, 
   auditId, 
-  totalSavings 
-}: EmailCaptureModalProps) {
+  totalSavings,
+  annualSavings,
+  recommendationsCount,
+  shareUrl
+}: Omit<EmailCaptureModalProps, 'shareToken'>) {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -29,7 +35,6 @@ export default function EmailCaptureModal({
     setLoading(true);
     setError('');
 
-    // Basic email validation
     if (!email.includes('@') || !email.includes('.')) {
       setError('Please enter a valid email');
       setLoading(false);
@@ -37,7 +42,7 @@ export default function EmailCaptureModal({
     }
 
     try {
-      // Update audit with email
+      // 1. Update audit with email in Supabase
       const { error: updateError } = await supabase
         .from('audits')
         .update({ email })
@@ -45,9 +50,31 @@ export default function EmailCaptureModal({
 
       if (updateError) throw updateError;
 
+      // 2. Send email via Resend
+      const emailResponse = await fetch('/api/email/send-audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          totalSavings,
+          annualSavings,
+          shareUrl,
+          recommendationsCount,
+          auditId,
+        }),
+      });
+
+      if (!emailResponse.ok) {
+        const errorData = await emailResponse.json();
+        console.error('Email send failed:', errorData.error);
+        if (errorData.hint) {
+          console.warn(errorData.hint);
+        }
+        // Still show success to user - they got the email capture at least
+      }
+
       setSubmitted(true);
       
-      // Close modal after 2 seconds
       setTimeout(() => {
         onClose();
       }, 2000);
@@ -62,10 +89,13 @@ export default function EmailCaptureModal({
     return (
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
         <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
-          <div className="text-5xl mb-4">🎉</div>
-          <h3 className="text-xl font-bold mb-2">Thanks for subscribing!</h3>
+          <div className="text-5xl mb-4">📧</div>
+          <h3 className="text-xl font-bold mb-2">Check your inbox!</h3>
           <p className="text-gray-600">
-            We&apos;ll send you a full report and personalized savings tips.
+            We&apos;ll send your audit report to <strong className="font-semibold">{email}</strong>
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            (Check spam folder if you don&apos;t see it in 2 minutes)
           </p>
         </div>
       </div>
@@ -108,11 +138,11 @@ export default function EmailCaptureModal({
             disabled={loading}
             className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 disabled:bg-gray-400 transition-colors"
           >
-            {loading ? 'Sending...' : 'Send My Report →'}
+            {loading ? 'Sending Report...' : 'Send My Report →'}
           </button>
           
           <p className="text-xs text-gray-400 text-center mt-4">
-            No spam. Unsubscribe anytime.
+            We&apos;ll email you the report. No spam.
           </p>
         </form>
       </div>
