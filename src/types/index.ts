@@ -35,6 +35,7 @@ export interface ToolRecommendation {
 
 export interface AuditResult {
   id: string
+  shareToken: string
   input: AuditInput
   recommendations: ToolRecommendation[]
   totalMonthlySavings: number

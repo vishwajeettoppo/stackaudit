@@ -305,6 +305,7 @@ export async function runAudit(input: AuditInput): Promise<AuditResult> {
   
   return {
     id: generateAuditId(),
+    shareToken: Math.random().toString(36).substring(2, 15),
     input,
     recommendations, // Return all valid recommendations
     totalMonthlySavings,

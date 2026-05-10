@@ -18,10 +18,22 @@ const workSans = Work_Sans({
   variable: '--font-worksans',
 })
 
-export const metadata: Metadata = {
-  title: 'StackAudit — Institutional AI Spend Intelligence',
-  description: 'High-fidelity AI spend audit system for startups. Precision-engineered to identify redundant subscriptions and optimize your engineering stack.',
-}
+
+
+export const metadata:Metadata = {
+  title: 'AI Spend Audit - Optimize Your AI Tool Stack',
+  description: 'Find hidden savings in your AI subscriptions. Audit ChatGPT, Copilot, Cursor, and more.',
+  openGraph: {
+    title: 'AI Spend Audit',
+    description: 'Find savings in your AI tool stack',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AI Spend Audit',
+    description: 'Find savings in your AI tool stack',
+  },
+};
 
 export default function RootLayout({
   children,

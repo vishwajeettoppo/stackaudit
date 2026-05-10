@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { AuditResult } from '@/types';
 import ThemeToggle from '@/components/ThemeToggle';
+import EmailCaptureModal from '@/components/EmailCaptureModal';
 
 export default function AuditPreviewPage() {
   const router = useRouter();
@@ -13,12 +14,18 @@ export default function AuditPreviewPage() {
     aiSummary: string | null;
     summaryLoading: boolean;
     summaryError: boolean;
+    showEmailModal: boolean;
+    auditId: string;
+    shareToken: string;
   }>({
     result: null,
     loading: true,
     aiSummary: null,
     summaryLoading: false,
     summaryError: false,
+    showEmailModal: false,
+    auditId: '',
+    shareToken: '',
   });
 
   const fetchAiSummary = useCallback(async (auditResult: AuditResult) => {
@@ -62,8 +69,22 @@ export default function AuditPreviewPage() {
       const parsedResult = JSON.parse(storedResult);
       // Defer update to satisfy lint
       const timeout = setTimeout(() => {
-        setState(prev => ({ ...prev, result: parsedResult, loading: false }));
+        setState(prev => ({ 
+          ...prev, 
+          result: parsedResult, 
+          loading: false,
+          auditId: parsedResult.id,
+          shareToken: parsedResult.shareToken
+        }));
+        
         fetchAiSummary(parsedResult);
+
+        // Show email modal after 3 seconds if savings > 0
+        if (parsedResult.totalMonthlySavings > 0) {
+          setTimeout(() => {
+            setState(prev => ({ ...prev, showEmailModal: true }));
+          }, 3000);
+        }
       }, 0);
       return () => clearTimeout(timeout);
     } catch {
@@ -184,16 +205,27 @@ export default function AuditPreviewPage() {
 
             <button 
               onClick={() => router.push('/')}
-              className="w-full py-4 px-6 rounded-xl bg-primary text-white text-xs font-black uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-primary/20 hover:bg-primary/90"
+              className="w-full py-4 px-6 rounded-xl bg-primary text-white text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-primary/20 hover:bg-primary/90"
             >
               ← Re-Execute Configuration
             </button>
             
             <button 
               onClick={() => window.print()}
-              className="w-full py-4 px-6 rounded-xl bg-foreground text-background text-xs font-black uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-foreground/10 hover:opacity-90"
+              className="w-full py-4 px-6 rounded-xl bg-foreground text-background text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-foreground/10 hover:opacity-90"
             >
               📄 Export Audit PDF
+            </button>
+
+            <button
+              onClick={() => {
+                const shareUrl = `${window.location.origin}/audit/share/${state.shareToken}`;
+                navigator.clipboard.writeText(shareUrl);
+                alert('Share link copied! Share your audit results with your team.');
+              }}
+              className="w-full py-4 px-6 rounded-xl border border-primary text-primary text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] hover:bg-primary/5"
+            >
+              🔗 Copy Share Link
             </button>
           </div>
 
@@ -330,6 +362,15 @@ export default function AuditPreviewPage() {
           </div>
         </div>
       </div>
+      {state.showEmailModal && state.result && (
+        <EmailCaptureModal
+          isOpen={state.showEmailModal}
+          onClose={() => setState(prev => ({ ...prev, showEmailModal: false }))}
+          auditId={state.auditId}
+          shareToken={state.shareToken}
+          totalSavings={state.result.totalMonthlySavings}
+        />
+      )}
     </main>
   );
 }
