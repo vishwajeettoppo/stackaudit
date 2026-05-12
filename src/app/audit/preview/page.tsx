@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuditResult } from '@/types';
+import { AuditResult, ToolRecommendation } from '@/types';
 import ThemeToggle from '@/components/ThemeToggle';
 import EmailCaptureModal from '@/components/EmailCaptureModal';
 
@@ -116,14 +116,14 @@ export default function AuditPreviewPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex items-center justify-between">
           <div className="flex items-center gap-4 group cursor-pointer" onClick={() => router.push('/')}>
             <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:scale-105">
-              <span className="text-white text-base font-black tracking-tighter">SA</span>
+              <span className="text-white text-base font-black tracking-tighter">S</span>
             </div>
             <div>
               <span className="text-xl tracking-tight block leading-none mb-1 uppercase text-foreground">
                 <span className="font-black">Stack</span>
-                <span className="font-black text-primary">Audit</span>
+                <span className="font-light text-primary">Audit</span>
               </span>
-              {/* <span className="label-caps !text-primary leading-none">Intelligence System</span> */}
+              <span className="label-caps !text-primary leading-none">Intelligence System</span>
             </div>
           </div>
           <ThemeToggle />
@@ -139,8 +139,10 @@ export default function AuditPreviewPage() {
               <div className="space-y-1">
                 <p className="label-caps">Audit Status</p>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-success"></div>
-                  <span className="text-sm font-black uppercase tracking-widest text-success">Certified Optimal</span>
+                  <div className={`w-2.5 h-2.5 rounded-full ${hasSavings ? 'bg-amber-500' : 'bg-success'} animate-pulse`}></div>
+                  <span className={`text-sm font-normal uppercase tracking-widest ${hasSavings ? 'text-amber-500' : 'text-success'}`}>
+                    {hasSavings ? 'Action Required' : 'Certified Optimal'}
+                  </span>
                 </div>
               </div>
 
@@ -148,8 +150,10 @@ export default function AuditPreviewPage() {
                 <p className="label-caps mb-4">Financial Overview</p>
                 <div className="space-y-6">
                   <div>
-                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1">Identified Spend</p>
-                    <p className="text-4xl font-black tabular-numbers tracking-tighter">${totalSpend.toLocaleString()}<span className="text-lg text-muted-foreground">/mo</span></p>
+                    <p className="text-[10px] font-normal text-muted-foreground uppercase tracking-wider mb-1">Identified Spend</p>
+                    <p className="text-4xl font-black tabular-numbers tracking-tighter text-foreground">
+                      ${totalSpend.toLocaleString()}<span className="text-lg text-muted-foreground font-medium">/mo</span>
+                    </p>
                   </div>
                   
                   {hasSavings ? (
@@ -158,11 +162,11 @@ export default function AuditPreviewPage() {
                       <p className="text-3xl font-black text-success tabular-numbers tracking-tighter">
                         +${result.totalMonthlySavings.toLocaleString()}
                       </p>
-                      <p className="text-[10px] font-bold text-success/60 uppercase">Monthly capital recovery</p>
+                      <p className="text-[10px] font-normal text-success/60 uppercase">Monthly capital recovery</p>
                     </div>
                   ) : (
                     <div className="bg-primary/5 border border-primary/10 rounded-xl p-5">
-                      <p className="text-sm font-bold text-primary italic">✓ Stack architecture is currently optimized for value.</p>
+                      <p className="text-sm font-medium text-primary italic leading-relaxed">✓ Stack architecture is currently optimized for maximum capital efficiency.</p>
                     </div>
                   )}
                 </div>
@@ -173,7 +177,7 @@ export default function AuditPreviewPage() {
                 <div className="space-y-4">
                   {result.input.tools.map((tool) => (
                     <div key={tool.toolId} className="space-y-1.5">
-                      <div className="flex justify-between text-[10px] font-bold uppercase tracking-tight">
+                      <div className="flex justify-between text-[10px] font-normal uppercase tracking-tight">
                         <span className="text-muted-foreground truncate max-w-[120px]">{tool.toolId.replace('-', ' ')}</span>
                         <span className="tabular-numbers text-foreground">{Math.round((tool.monthlySpend / totalSpend) * 100)}%</span>
                       </div>
@@ -191,49 +195,51 @@ export default function AuditPreviewPage() {
               <div className="pt-6 border-t border-border space-y-4">
                 <p className="label-caps">Organization Context</p>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-muted/30 p-3 rounded-lg">
-                    <p className="text-[9px] font-black text-muted-foreground uppercase mb-1">Seats</p>
+                  <div className="bg-muted/30 p-3 rounded-lg border border-border/30">
+                    <p className="text-[9px] font-normal text-muted-foreground uppercase mb-1">Seats</p>
                     <p className="font-bold tabular-numbers tracking-tight">{result.input.teamSize}</p>
                   </div>
-                  <div className="bg-muted/30 p-3 rounded-lg">
-                    <p className="text-[9px] font-black text-muted-foreground uppercase mb-1">Domain</p>
+                  <div className="bg-muted/30 p-3 rounded-lg border border-border/30">
+                    <p className="text-[9px] font-normal text-muted-foreground uppercase mb-1">Domain</p>
                     <p className="font-bold capitalize truncate">{result.input.useCase}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <button 
-              onClick={() => router.push('/')}
-              className="w-full py-4 px-6 rounded-xl bg-primary text-white text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-primary/20 hover:bg-primary/90"
-            >
-              ← Re-Execute Configuration
-            </button>
-            
-            <button 
-              onClick={() => window.print()}
-              className="w-full py-4 px-6 rounded-xl bg-foreground text-background text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-foreground/10 hover:opacity-90"
-            >
-              📄 Export Audit PDF
-            </button>
+            <div className="space-y-3">
+              <button 
+                onClick={() => router.push('/')}
+                className="w-full py-4 px-6 rounded-xl bg-primary text-white text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-primary/20 hover:bg-primary/90"
+              >
+                ← Re-Execute Configuration
+              </button>
+              
+              <button 
+                onClick={() => window.print()}
+                className="w-full py-4 px-6 rounded-xl bg-foreground text-background text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] shadow-xl shadow-foreground/10 hover:opacity-90"
+              >
+                📄 Export Audit PDF
+              </button>
 
-            <button
-              onClick={() => {
-                const shareUrl = `${window.location.origin}/audit/share/${state.shareToken}`;
-                navigator.clipboard.writeText(shareUrl);
-                alert('Share link copied! Share your audit results with your team.');
-              }}
-              className="w-full py-4 px-6 rounded-xl border border-primary text-primary text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] hover:bg-primary/5"
-            >
-              🔗 Copy Share Link
-            </button>
+              <button
+                onClick={() => {
+                  const shareUrl = `${window.location.origin}/audit/share/${state.shareToken}`;
+                  navigator.clipboard.writeText(shareUrl);
+                  alert('Share link copied! Share your audit results with your team.');
+                }}
+                className="w-full py-4 px-6 rounded-xl border border-border bg-background text-foreground text-xs font-normal uppercase tracking-widest transition-all active:scale-[0.98] hover:bg-muted/50"
+              >
+                🔗 Copy Share Link
+              </button>
+            </div>
           </div>
 
           {/* Right Column: AI Summary & Tool Registry (8 Columns) */}
           <div className="lg:col-span-8 space-y-10 animate-fade-in-up">
             
-            {/* AI Narrative Summary Box - MOVED TO TOP */}
-            <div className="credex-card p-8 bg-primary/[0.02] border-primary/10 shadow-primary/5">
+            {/* AI Narrative Summary Box - POSITIONED AT TOP */}
+            <div className="credex-card p-8 bg-primary/[0.02] border-primary/10 shadow-credex">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -251,7 +257,7 @@ export default function AuditPreviewPage() {
               ) : state.summaryError ? (
                 <p className="text-sm text-muted-foreground italic">Intelligence synthesis temporarily unavailable. Manual audit registry below remains accurate.</p>
               ) : state.aiSummary ? (
-                <p className="text-md text-foreground font-medium leading-relaxed italic border-l-2 border-primary/20 pl-6">
+                <p className="text-base text-foreground font-medium leading-relaxed italic border-l-2 border-primary/20 pl-6">
                   &ldquo;{state.aiSummary}&rdquo;
                 </p>
               ) : null}
@@ -260,7 +266,7 @@ export default function AuditPreviewPage() {
             <div className="space-y-6">
               <div className="flex items-center justify-between px-2">
                 <h2 className="label-caps !text-foreground font-black text-sm">System Inventory Breakdown</h2>
-                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{result.input.tools.length} Infrastructure Components</span>
+                <span className="text-[10px] font-normal text-muted-foreground uppercase tracking-widest">{result.input.tools.length} Infrastructure Components</span>
               </div>
 
               {/* Per-Tool Inventory Cards */}
@@ -279,7 +285,7 @@ export default function AuditPreviewPage() {
                       <div className="grid grid-cols-1 md:grid-cols-12">
                         <div className="md:col-span-8 p-8 space-y-5 border-b md:border-b-0 md:border-r border-border">
                           <div className="flex items-center gap-4">
-                            <div className={`px-2.5 py-1 rounded text-[9px] font-black uppercase tracking-widest border ${
+                            <div className={`px-2.5 py-1 rounded text-[9px] font-normal uppercase tracking-widest border ${
                               isOptimized 
                                 ? 'bg-success/5 border-success/20 text-success' 
                                 : 'bg-primary/5 border-primary/20 text-primary'
@@ -319,15 +325,15 @@ export default function AuditPreviewPage() {
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                 </svg>
                               </div>
-                              <p className="text-sm font-black text-success uppercase tracking-widest">Verified</p>
+                              <p className="text-sm font-normal text-success uppercase tracking-widest">Verified</p>
                             </div>
                           ) : (
                             <div className="space-y-1">
                               <p className="text-3xl font-black tabular-numbers tracking-tighter text-primary">
                                 +${rec.monthlySavings}
-                                <span className="text-xs ml-0.5">/ month</span>
+                                <span className="text-xs ml-0.5">/mo</span>
                               </p>
-                              <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-tight">Available Savings</p>
+                              <p className="text-[9px] font-normal text-muted-foreground uppercase tracking-tight">Available Savings</p>
                             </div>
                           )}
                         </div>
@@ -341,19 +347,22 @@ export default function AuditPreviewPage() {
             {/* High-Value API Optimization CTA */}
             {result.totalMonthlySavings > 500 && (
               <div className="relative overflow-hidden rounded-[2rem] bg-primary p-10 text-white shadow-2xl shadow-primary/20 animate-fade-in">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 blur-[80px] -mr-32 -mt-32 rounded-full"></div>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 blur-[80px] -mr-32 -mt-32 rounded-full opacity-50"></div>
                 <div className="relative z-10 space-y-6">
                   <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full border border-white/10">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                    <span className="text-[10px] font-black uppercase tracking-widest">Enterprise Optimization</span>
+                    <span className="text-[10px] font-normal uppercase tracking-widest">Enterprise Optimization</span>
                   </div>
                   <div className="max-w-xl space-y-3">
                     <h3 className="text-3xl font-black tracking-tight leading-none">High-Volume Infrastructure Detected.</h3>
                     <p className="text-primary-foreground/70 font-medium leading-relaxed">
-                      At this spend velocity, you qualify for the Credex Capital Program. Access institutional-grade discounts (15-20% off) for Anthropic, OpenAI, and frontier model APIs.
+                      At this spend velocity, you qualify for the StackAudit Capital Program. Access institutional-grade discounts (15-20% off) for Anthropic, OpenAI, and frontier model APIs.
                     </p>
                   </div>
-                  <button className="bg-white text-primary font-black px-8 py-4 rounded-xl text-xs uppercase tracking-[0.15em] hover:bg-accent hover:text-primary transition-all active:scale-95 shadow-xl shadow-black/10">
+                  <button 
+                    onClick={() => setState(prev => ({ ...prev, showEmailModal: true }))}
+                    className="bg-white text-primary font-black px-8 py-4 rounded-xl text-xs uppercase tracking-[0.15em] hover:bg-accent hover:text-primary transition-all active:scale-95 shadow-xl shadow-black/10"
+                  >
                     Request Certified Quote
                   </button>
                 </div>
@@ -362,6 +371,7 @@ export default function AuditPreviewPage() {
           </div>
         </div>
       </div>
+      
       {state.showEmailModal && state.result && (
         <EmailCaptureModal
           isOpen={state.showEmailModal}
@@ -369,6 +379,9 @@ export default function AuditPreviewPage() {
           auditId={state.auditId}
           shareToken={state.shareToken}
           totalSavings={state.result.totalMonthlySavings}
+          annualSavings={state.result.totalAnnualSavings}
+          recommendationsCount={state.result.recommendations.length}
+          shareUrl={`${window.location.origin}/audit/share/${state.shareToken}`}
         />
       )}
     </main>
