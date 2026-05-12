@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { AuditResult, ToolRecommendation } from '@/types';
+import { AuditResult } from '@/types';
 import ThemeToggle from '@/components/ThemeToggle';
 import EmailCaptureModal from '@/components/EmailCaptureModal';
 
@@ -121,9 +121,8 @@ export default function AuditPreviewPage() {
             <div>
               <span className="text-xl tracking-tight block leading-none mb-1 uppercase text-foreground">
                 <span className="font-black">Stack</span>
-                <span className="font-light text-primary">Audit</span>
+                <span className="font-black text-primary">Audit</span>
               </span>
-              <span className="label-caps !text-primary leading-none">Intelligence System</span>
             </div>
           </div>
           <ThemeToggle />

@@ -15,7 +15,7 @@
 
 **What I got stuck on:**
 - *Anthropic API access*: console.anthropic.com showed $0 credits with no free tier available without adding a payment method. 
-- Resolved by switching to Gemini 1.5 Flash via Google AI Studio (aistudio.google.com).
+- Resolved by switching to Gemini 2.5 Flash via Google AI Studio (aistudio.google.com).
 - Given "Anthropic preferred, or any LLM" — Gemini satisfies the requirement and has a free tier that covers the full project scope.
 
 **What I learned:**
@@ -74,3 +74,16 @@
 **What worked:**
 - Emails delivered within 2-3 seconds
 - Share links preserve all audit data
+
+## Day 5 — 2026-05-12
+
+**What I did:**
+- Polished UI
+- Add PDF export via html2pdf (bonus feature)
+- Done with the required markdown files
+- Achieve Lighthouse performance targets"
+    - Performance - **97**
+    - Accessibility - **85**
+    - Best Practices - **100**
+    - SEO - **100**
+- Vercel Deployment

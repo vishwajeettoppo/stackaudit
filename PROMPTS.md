@@ -3,7 +3,7 @@ This document details the AI architecture and prompt engineering strategy for th
 
 ## 1. Verbatim Prompts
 
-The following prompts are generated dynamically based on the audit results and sent to the `gemini-1.5-flash` model.
+The following prompts are generated dynamically based on the audit results and sent to the `gemini-2.5-flash` model.
 
 ### Path A: Savings Identified (User Prompt)
 ```text

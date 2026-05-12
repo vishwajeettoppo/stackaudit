@@ -18,10 +18,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center gap-8 mr-8">
-              <a href="#" className="label-caps hover:text-primary transition-colors">Methodology</a>
-              <a href="#" className="label-caps hover:text-primary transition-colors">Benchmarks</a>
-            </nav>
+            
             <ThemeToggle />
           </div>
         </div>

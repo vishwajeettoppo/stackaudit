@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const prompt = buildPrompt(body);
 
     // Use cheaper/faster model for summaries
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
     const result = await model.generateContent(prompt);
     const summary = result.response.text();

@@ -45,7 +45,7 @@ graph TB
 | Styling | Tailwind CSS | Rapid UI development |
 | State | Zustand + persist | Simple, localStorage built-in |
 | Database | Supabase | Free tier, Postgres, easy setup |
-| AI | Gemini 1.5 Flash | Free tier, fast, good enough |
+| AI | Gemini 2.5 Flash | Free tier, fast, good enough |
 | Email | Resend | Free transactional, React templates |
 | Testing | Vitest | Fast, works with Next.js |
 
