@@ -2,13 +2,14 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export async function GET({ params }: { params: { token: string } }) {
+export default async function Image({ params }: { params: Promise<{ token: string }> }) {
+  const { token } = await params;
   // Fetch audit data
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
   
   const response = await fetch(
-    `${supabaseUrl}/rest/v1/audits?share_token=eq.${params.token}&select=total_monthly_savings`,
+    `${supabaseUrl}/rest/v1/audits?share_token=eq.${token}&select=total_monthly_savings`,
     {
       headers: {
         apikey: supabaseKey,
