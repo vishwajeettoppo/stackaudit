@@ -376,7 +376,6 @@ export default function AuditPreviewPage() {
           isOpen={state.showEmailModal}
           onClose={() => setState(prev => ({ ...prev, showEmailModal: false }))}
           auditId={state.auditId}
-          shareToken={state.shareToken}
           totalSavings={state.result.totalMonthlySavings}
           annualSavings={state.result.totalAnnualSavings}
           recommendationsCount={state.result.recommendations.length}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { AuditReportEmail } from '@/emails/AuditReportEmail';
+import * as React from 'react';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -33,14 +34,14 @@ export async function POST(request: NextRequest) {
         annualSavings,
         shareUrl,
         recommendationsCount,
-      }),
+      }) as React.ReactElement,
     });
 
     if (error) {
       console.error('Resend error:', error);
       
       // Provide a helpful hint for the developer if it's a validation error (e.g. unverified domain)
-      const hint = error.name === 'validation_error' 
+      const hint: string | undefined = error.name === 'validation_error' 
         ? 'HINT: Resend restricts sending to your verified email only during development. Verify your domain at resend.com/domains to send to any recipient.'
         : undefined;
 
